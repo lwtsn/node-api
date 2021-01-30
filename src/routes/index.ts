@@ -1,21 +1,5 @@
 import { Router } from "express";
-import { ethers } from "ethers";
-import { Erc20 } from "../typechain";
-
-import ERC20_ABI from "../contracts/Abi/Erc20.json";
-import { ERC20_ADDRESS } from "../contracts";
-
-const provider = new ethers.providers.JsonRpcProvider(
-  "https://rinkeby.infura.io/v3/73bd0ea4c5d64e248551358ec2f1a8c3"
-);
-
-const wallet = ethers.Wallet.createRandom().connect(provider);
-
-const tokenContract = new ethers.Contract(
-  ERC20_ADDRESS,
-  ERC20_ABI.abi,
-  wallet
-) as Erc20;
+import { getTokenContract } from "../service/web3";
 
 const router = Router();
 
@@ -25,23 +9,32 @@ router.get("/", function (request, response, next) {
 });
 
 router.get("/token", async (req, response) => {
+  let tokenContract = await getTokenContract();
+
   const name = await tokenContract.name().then((name) => {
     return name;
   });
 
-  response.render("token", {
+  const decimals = await tokenContract.decimals().then((decimals) => {
+    return decimals;
+  });
+
+  response.json({
     name: name,
+    decimals: decimals,
     address: tokenContract.address,
   });
 });
 
 router.post("/token", async (request, response) => {
-  const recipientAddress = request.body.recipientAddress;
+  let tokenContract = await getTokenContract();
+
+  const recipientAddress = request.body["recipientAddress"];
   const amount = request.body["amount"];
 
   await tokenContract.transfer(recipientAddress, amount).then(console.log);
 
-  response.render("token", {
+  response.json({
     address: tokenContract.address,
   });
 });

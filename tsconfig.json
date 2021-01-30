@@ -6,7 +6,23 @@
     "outDir": "./build",
     "esModuleInterop": true,
     "strict": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": [
+      "reflect-metadata",
+      "jest"
+    ],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ]
   },
-  "include": ["./test", "routes", "service"]
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "include": [
+    "./src/**/*.ts",
+    "./test/**/*.ts"
+  ]
 }
