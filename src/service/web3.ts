@@ -14,9 +14,9 @@ function getProvider() {
     return provider;
   }
 
-  let url = `${config.infuraNetworkAddress}/${config.infuraApiKey}`;
-
-  return (provider = new ethers.providers.JsonRpcProvider(url));
+  return (provider = new ethers.providers.JsonRpcProvider(
+      config.ethereumNetworkAddress)
+  );
 }
 
 async function getWallet(): Promise<Wallet> {
@@ -24,9 +24,7 @@ async function getWallet(): Promise<Wallet> {
     return wallet;
   }
 
-  return (wallet = ethers.Wallet.fromMnemonic(config.privateMnemonic).connect(
-    getProvider()
-  ));
+  return new Wallet(config.privateKey, await getProvider());
 }
 
 export async function getTokenContract(): Promise<Erc20> {

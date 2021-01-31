@@ -3,8 +3,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 export default {
-  infuraNetworkAddress: process.env.INFURA_NETWORK_ADDRESS ?? "",
-  infuraApiKey: process.env.INFURA_API_KEY ?? "",
+  ethereumNetworkAddress: process.env.ETHEREUM_NETWORK_ADDRESS ?? "",
   alchemyNetworkAddress: process.env.ALCHEMY_NETWORK_ADDRESS ?? "",
   alchemyApiKey: process.env.ALCHEMY_API_KEY ?? "",
   privateMnemonic: process.env.PRIVATE_MNEMONIC ?? "",

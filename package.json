@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "hardhat-typechain": "^0.3.4",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
+    "jade": "^1.9.2",
     "morgan": "~1.9.1",
     "sequelize": "^6.3.4"
   },

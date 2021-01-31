@@ -5,24 +5,26 @@ import "@nomiclabs/hardhat-ethers";
 import "hardhat-typechain";
 
 const config: HardhatUserConfig = {
-  solidity: {
-    version: "0.6.8",
-    settings: {
-      optimizer: {
-        enabled: true,
-      },
-    },
-  },
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
+      accounts: [
+        {
+          privateKey: environment.privateKey,
+          balance: "50000"
+        }
+      ],
       forking: {
         enabled: true,
         url:
-          "https://eth-mainnet.alchemyapi.io/v2/aY23iBDYGmLE7QvHpqRpkLoUBfm1xBme",
-      },
-    },
+          `${environment.alchemyNetworkAddress}/${environment.alchemyApiKey}`
+      }
+    }
   },
+  typechain: {
+    outDir: "typechain",
+    target: "ethers-v5"
+  }
 };
 
 export default config;
