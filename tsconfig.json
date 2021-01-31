@@ -1,28 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "module": "commonjs",
-    "rootDir": "./",
-    "outDir": "./build",
-    "esModuleInterop": true,
     "strict": true,
-    "resolveJsonModule": true,
-    "types": [
-      "reflect-metadata",
-      "jest"
-    ],
-    "typeRoots": [
-      "./types",
-      "./node_modules/@types"
-    ]
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "resolveJsonModule": true
   },
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ],
-  "include": [
-    "./src/**/*.ts",
-    "./test/**/*.ts"
-  ]
+  "include": ["./test", "./helpers", "./src"],
+  "files": ["./hardhat.config.ts"]
 }

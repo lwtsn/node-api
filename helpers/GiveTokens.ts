@@ -1,6 +1,7 @@
 import { BigNumber } from "ethers";
 import { ERC20_ABI, ERC20_ADDRESS } from "../src/contracts/token";
-import { DAI_OWNER } from "./constants";
+import { WHALE_ACCOUNT } from "./constants";
+import config from "../config";
 
 const oneEther = BigNumber.from(1).mul(BigNumber.from(10).pow(18));
 
@@ -17,20 +18,15 @@ async function main() {
   });
 
   console.log("Getting signer");
-  let daiOwner = await hre.ethers.provider.getSigner(DAI_OWNER);
 
-  console.log("Sending Eth to me");
+  let daiOwner = await hre.ethers.provider.getSigner(WHALE_ACCOUNT);
+
+  console.log("Sending Eth to test account");
   await daiOwner.sendTransaction({
-    from: DAI_OWNER,
+    from: WHALE_ACCOUNT,
     value: oneEther.mul(4000),
-    to: ME,
+    to: config.publicKey,
   });
-
-  // await daiOwner.sendTransaction({
-  //   from: DAI_OWNER,
-  //   value: oneEther.mul(4000),
-  //   to: ME,
-  // });
 }
 
 main()

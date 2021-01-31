@@ -1,7 +1,11 @@
-.PHONY : typechain compile test compile-clean console run prettier integration
+.PHONY : typechain run-node giveToken
 
 typechain:
-	./src/node_modules/.bin/typechain --target ethers-v5 --outDir src/typechain './src/contracts/Abi/*.json'
+	./node_modules/.bin/typechain --target ethers-v5 --outDir src/typechain './src/contracts/Abi/*.json'
 
 run-node:
-	yarn hardhat node
+	npx hardhat node --fork https://eth-mainnet.alchemyapi.io/v2/aY23iBDYGmLE7QvHpqRpkLoUBfm1xBme
+
+
+giveToken:
+	npx hardhat --network localhost run ./helpers/GiveTokens.ts
